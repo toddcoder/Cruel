@@ -1,7 +1,4 @@
 ﻿namespace Cruel.VirtualMachine
 {
-	public class Machine
-	{
-		
-	}
+	public class Machine { }
 }
