@@ -1,0 +1,2 @@
+# Cruel
+Cruel programming language
