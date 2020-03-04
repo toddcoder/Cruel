@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Core.Monads;
 using Core.RegularExpressions;
@@ -29,6 +30,10 @@ namespace Cruel.Lexing
 
       public IEnumerable<Token> Tokens => tokens;
 
+      public int Index => index;
+
+      public string CurrentSource => source.Drop(index);
+
       public void NextToken(string fragment, TokenType type)
       {
          var length = fragment.Length;
@@ -54,6 +59,10 @@ namespace Cruel.Lexing
             more = false;
          }
       }
+
+      public void Exception(Exception exception) => Exception(exception.Message);
+
+      public void Exception(string message) => NextToken(message, TokenType.Exception);
 
       public bool More => more;
 

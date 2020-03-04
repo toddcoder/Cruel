@@ -45,12 +45,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ISerializing.cs" />
+    <Compile Include="Lexing\CloseBraceLexer.cs" />
+    <Compile Include="Lexing\CloseBracketLexer.cs" />
     <Compile Include="Lexing\CloseParenthesisLexer.cs" />
+    <Compile Include="Lexing\CommaLexer.cs" />
     <Compile Include="Lexing\EndOfLineLexer.cs" />
+    <Compile Include="Lexing\FloatParser.cs" />
     <Compile Include="Lexing\IdentifierLexer.cs" />
+    <Compile Include="Lexing\IntegerLexer.cs" />
+    <Compile Include="Lexing\OpenBraceLexer.cs" />
+    <Compile Include="Lexing\OpenBracketLexer.cs" />
     <Compile Include="Lexing\OpenParenthesisLexer.cs" />
     <Compile Include="Lexing\Lexer.cs" />
     <Compile Include="Lexing\LexingState.cs" />
+    <Compile Include="Lexing\StringLexer.cs" />
     <Compile Include="Lexing\Token.cs" />
     <Compile Include="Lexing\TokenType.cs" />
     <Compile Include="Lexing\WhitespaceLexer.cs" />

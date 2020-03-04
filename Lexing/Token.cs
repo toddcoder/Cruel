@@ -29,5 +29,7 @@
       public int EndLine { get; }
 
       public int EndColumn { get; }
+
+      public override string ToString() => $"'{Text}' @ ({Index}:{Length}) [{StartLine}, {StartColumn}]-[{EndLine}, {EndColumn}]";
    }
 }

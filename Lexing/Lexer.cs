@@ -25,5 +25,7 @@ namespace Cruel.Lexing
             return Unit.Some();
          }
       }
+
+      public virtual void AddToken(LexingState state, string text) => state.NextToken(text, Type);
    }
 }
