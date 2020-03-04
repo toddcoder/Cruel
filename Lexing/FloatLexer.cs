@@ -1,6 +1,6 @@
 ﻿namespace Cruel.Lexing
 {
-   public class FloatParser : Lexer
+   public class FloatLexer : Lexer
    {
       public override string Pattern => "^ /([/d '_']+ '.' [/d '_']+) (/'e' /(['-+']? /d+))? /'i'?";
 

@@ -15,6 +15,12 @@
       CloseBracket,
       OpenBrace,
       CloseBrace,
+      Plus,
+      Dash,
+      Star,
+      Slash,
+      Caret,
+      Tilde,
       EndOfFile,
       Exception
    }

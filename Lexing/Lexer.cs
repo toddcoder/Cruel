@@ -13,6 +13,7 @@ namespace Cruel.Lexing
       {
          if (state.Match(Pattern).If(out var text, out var anyException))
          {
+            AddToken(state, text);
             return none<Unit>();
          }
          else if (anyException.If(out var exception))
