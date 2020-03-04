@@ -51,6 +51,7 @@
     <Compile Include="VirtualMachine\Module.cs" />
     <Compile Include="VirtualMachine\Operation.cs" />
     <Compile Include="VirtualMachine\OperationCode.cs" />
+    <Compile Include="VirtualMachine\StackItem.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
