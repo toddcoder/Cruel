@@ -1,0 +1,29 @@
+﻿using Core.Monads;
+using static Core.Monads.MonadFunctions;
+
+namespace Cruel.Lexing
+{
+   public abstract class Lexer
+   {
+      public abstract string Pattern { get; }
+
+      public abstract TokenType Type { get; }
+
+      public virtual IMaybe<Unit> Match(LexingState state)
+      {
+         if (state.Match(Pattern).If(out var text, out var anyException))
+         {
+            return none<Unit>();
+         }
+         else if (anyException.If(out var exception))
+         {
+            state.NextToken(exception.Message, TokenType.Exception);
+            return none<Unit>();
+         }
+         else
+         {
+            return Unit.Some();
+         }
+      }
+   }
+}

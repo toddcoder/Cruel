@@ -2,10 +2,10 @@
 
 namespace Cruel.VirtualMachine
 {
-	public interface IHostInterface
-	{
-		void Print(string text);
+   public interface IHostInterface
+   {
+      void Print(string text);
 
-		IResult<string> ReadLine();
-	}
+      IResult<string> ReadLine();
+   }
 }
