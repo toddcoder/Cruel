@@ -34,7 +34,9 @@ namespace Cruel.Lexing
          var result = true;
          while (result && substring.More)
          {
-            result = matchWhitespace() || matchEndOfLine() || matchIdentifier() || matchFloat() || matchInt() || matchString();
+            result = matchWhitespace() || matchEndOfLine() || matchIdentifier() || matchFloat() || matchInt() || matchString() ||
+               matchOperator() || matchOpenParenthesis() || matchCloseParenthesis() || matchOpenBracket() || matchCloseBracket() ||
+               matchOpenBrace() || matchCloseBrace();
          }
 
          return tokens.Success<IEnumerable<Token>>();
@@ -78,9 +80,9 @@ namespace Cruel.Lexing
 
       protected bool match(string pattern, TokenType type) => match(pattern, type, m => m.FirstMatch);
 
-      protected bool match(char ch, TokenType type, Func<char, char, bool> matchFunc)
+      protected bool match(char ch, TokenType type)
       {
-         if (matchFunc(substring.CurrentChar, ch) && substring.Advance(1))
+         if (substring.CurrentChar == ch && substring.Advance(1))
          {
             var token = new Token(ch.ToString(), type, substring);
             tokens.Add(token);
@@ -279,5 +281,53 @@ namespace Cruel.Lexing
 
          return false;
       }
+
+      protected bool matchOperator()
+      {
+         if (matcher.IsMatch(substring.Current, REGEX_OPERATOR))
+         {
+            var operatorSource = matcher.FirstMatch;
+            if (substring.Advance(operatorSource.Length))
+            {
+               TokenType type;
+               switch (operatorSource)
+               {
+                  case "+":
+                     type = TokenType.Plus;
+                     break;
+                  case "-":
+                     type = TokenType.Dash;
+                     break;
+                  case "*":
+                     type = TokenType.Star;
+                     break;
+                  case "/":
+                     type = TokenType.Slash;
+                     break;
+                  default:
+                     return false;
+               }
+
+               var token = new Token(operatorSource, type, substring);
+               tokens.Add(token);
+
+               return substring.Next();
+            }
+         }
+
+         return false;
+      }
+
+      protected bool matchOpenParenthesis() => match('(', TokenType.OpenParenthesis);
+
+      protected bool matchCloseParenthesis() => match(')', TokenType.CloseParenthesis);
+
+      protected bool matchOpenBracket() => match('[', TokenType.OpenBracket);
+
+      protected bool matchCloseBracket() => match(']', TokenType.CloseBracket);
+
+      protected bool matchOpenBrace() => match('{', TokenType.OpenBrace);
+
+      protected bool matchCloseBrace() => match('}', TokenType.CloseBrace);
    }
 }
