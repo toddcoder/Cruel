@@ -14,6 +14,10 @@
          EndColumn = endColumn;
       }
 
+      public Token(string text, TokenType type, Substring substring) :
+         this(text, type, substring.Index, substring.Length, substring.StartLine, substring.StartColumn, substring.EndLine,
+            substring.EndColumn) { }
+
       public string Text { get; }
 
       public TokenType Type { get; }
