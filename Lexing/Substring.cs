@@ -1,8 +1,9 @@
 ﻿using Core.Strings;
+using Cruel.Interfaces;
 
 namespace Cruel.Lexing
 {
-   public class Substring
+   public class Substring : ISegment
    {
       protected string source;
       protected int sourceLength;

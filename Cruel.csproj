@@ -45,12 +45,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ISerializing.cs" />
+    <Compile Include="Analyzing\AnalysisState.cs" />
+    <Compile Include="Interfaces\ISegment.cs" />
+    <Compile Include="Interfaces\ISerializing.cs" />
     <Compile Include="Lexing\Lexer.cs" />
     <Compile Include="Lexing\LexingState.cs" />
     <Compile Include="Lexing\Substring.cs" />
     <Compile Include="Lexing\Token.cs" />
     <Compile Include="Lexing\TokenType.cs" />
+    <Compile Include="Nodes\Node.cs" />
+    <Compile Include="Nodes\Statements\Statement.cs" />
+    <Compile Include="Nodes\Symbols\Symbol.cs" />
+    <Compile Include="Operations\OperationsBuilder.cs" />
+    <Compile Include="Parsing\TokenCrawler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VirtualMachine\IHostInterface.cs" />
     <Compile Include="VirtualMachine\Machine.cs" />
@@ -59,6 +66,8 @@
     <Compile Include="VirtualMachine\OperationCode.cs" />
     <Compile Include="VirtualMachine\StackItem.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Parsing\Expressions\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
