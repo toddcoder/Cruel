@@ -21,6 +21,8 @@
       Slash,
       Caret,
       Tilde,
+      Semicolon,
+      Equal,
       EndOfFile,
       Exception
    }

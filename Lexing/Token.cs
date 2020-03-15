@@ -34,6 +34,9 @@
 
       public int EndColumn { get; }
 
-      public override string ToString() => $"'{Text}' @ ({Index}:{Length}) [{StartLine}, {StartColumn}]-[{EndLine}, {EndColumn}]";
+      public override string ToString()
+      {
+         return $"'{Text}'-{Type} @ ({Index}:{Length}) [{StartLine}, {StartColumn}]-[{EndLine}, {EndColumn}]";
+      }
    }
 }

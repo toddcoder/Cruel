@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using Core.Assertions;
+using Core.Computers;
 using Core.Monads;
 using Core.Numbers;
 using Core.RegularExpressions;
 using Core.Strings;
+using static Core.Assertions.AssertionFunctions;
 
 namespace Cruel.Lexing
 {
@@ -16,7 +20,17 @@ namespace Cruel.Lexing
       protected const string REGEX_FLOAT = "^ ([/d '_']+ '.' [/d '_']+) (/'e' /(['-+']? /d+))? /'i'?";
       protected const string REGEX_INT = "^ ([/d '_']+) /['Lif']? /b";
       protected const string REGEX_STRING = "^ [dquote]";
-      protected const string REGEX_OPERATOR = "^ ['+*//-']";
+      protected const string REGEX_OPERATOR = "^ ['+*//^~-']";
+
+      public static IResult<Lexer> New(FileName file)
+      {
+         var fileTrying = file.TryTo;
+         return
+            from extension in assert(() => file).Must().HaveExtensionOf(".cruel").OrFailure()
+            from exists in assert(() => file).Must().Exist().OrFailure()
+            from source in fileTrying.Text
+            select new Lexer(source);
+      }
 
       protected Substring substring;
       protected List<Token> tokens;
@@ -36,7 +50,7 @@ namespace Cruel.Lexing
          {
             result = matchWhitespace() || matchEndOfLine() || matchIdentifier() || matchFloat() || matchInt() || matchString() ||
                matchOperator() || matchOpenParenthesis() || matchCloseParenthesis() || matchOpenBracket() || matchCloseBracket() ||
-               matchOpenBrace() || matchCloseBrace();
+               matchOpenBrace() || matchCloseBrace() || matchSemicolon() || matchComma() || matchEqual();
          }
 
          return tokens.Success<IEnumerable<Token>>();
@@ -82,7 +96,7 @@ namespace Cruel.Lexing
 
       protected bool match(char ch, TokenType type)
       {
-         if (substring.CurrentChar == ch && substring.Advance(1))
+         if (substring.More && substring.CurrentChar == ch && substring.Advance(1))
          {
             var token = new Token(ch.ToString(), type, substring);
             tokens.Add(token);
@@ -129,7 +143,7 @@ namespace Cruel.Lexing
             var hex = false;
             var hexText = new StringBuilder();
 
-            foreach (var ch in current)
+            foreach (var ch in current.Skip(1))
             {
                switch (ch)
                {
@@ -304,6 +318,12 @@ namespace Cruel.Lexing
                   case "/":
                      type = TokenType.Slash;
                      break;
+                  case "^":
+                     type = TokenType.Caret;
+                     break;
+                  case "~":
+                     type = TokenType.Tilde;
+                     break;
                   default:
                      return false;
                }
@@ -329,5 +349,11 @@ namespace Cruel.Lexing
       protected bool matchOpenBrace() => match('{', TokenType.OpenBrace);
 
       protected bool matchCloseBrace() => match('}', TokenType.CloseBrace);
+
+      protected bool matchSemicolon() => match(';', TokenType.Semicolon);
+
+      protected bool matchComma() => match(',', TokenType.Comma);
+
+      protected bool matchEqual() => match('=', TokenType.Equal);
    }
 }

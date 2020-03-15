@@ -52,6 +52,8 @@ namespace Cruel.Lexing
          if (PreviousNewLine)
          {
             endColumn = length;
+            startLine++;
+            endLine++;
          }
          else
          {

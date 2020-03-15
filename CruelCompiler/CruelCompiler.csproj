@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F14AD3A4-2907-47B7-B9A2-AB40A02368A2}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cruel</RootNamespace>
-    <AssemblyName>Cruel</AssemblyName>
+    <ProjectGuid>{76476255-321A-40BE-B647-D7CF6F76C388}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>CruelCompiler</RootNamespace>
+    <AssemblyName>CruelCompiler</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,8 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core, Version=1.0.3.3, Culture=neutral, PublicKeyToken=7080d2d2d522ad62, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Core">
       <HintPath>E:\Projects\Libraries\Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -45,20 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ISerializing.cs" />
-    <Compile Include="Lexing\Lexer.cs" />
-    <Compile Include="Lexing\LexingState.cs" />
-    <Compile Include="Lexing\Substring.cs" />
-    <Compile Include="Lexing\Token.cs" />
-    <Compile Include="Lexing\TokenType.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VirtualMachine\IHostInterface.cs" />
-    <Compile Include="VirtualMachine\Machine.cs" />
-    <Compile Include="VirtualMachine\Module.cs" />
-    <Compile Include="VirtualMachine\Operation.cs" />
-    <Compile Include="VirtualMachine\OperationCode.cs" />
-    <Compile Include="VirtualMachine\StackItem.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cruel.csproj">
+      <Project>{f14ad3a4-2907-47b7-b9a2-ab40a02368a2}</Project>
+      <Name>Cruel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
