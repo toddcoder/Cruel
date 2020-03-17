@@ -6,15 +6,12 @@ namespace Cruel.Nodes
 {
    public abstract class Node : ISegment
    {
-      public Node(int index, int length, int startLine, int startColumn, int endLine, int endColumn)
+      public Node(Segment segment)
       {
-         Index = index;
-         Length = length;
-         StartLine = startLine;
-         StartColumn = startColumn;
-         EndLine = endLine;
-         EndColumn = endColumn;
+         Segment = segment;
       }
+
+      public Segment Segment { get; }
 
       public int Index { get; }
 
