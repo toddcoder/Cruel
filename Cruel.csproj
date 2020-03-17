@@ -55,10 +55,13 @@
     <Compile Include="Lexing\TokenType.cs" />
     <Compile Include="Nodes\Node.cs" />
     <Compile Include="Nodes\Statements\Statement.cs" />
-    <Compile Include="Nodes\Symbols\Symbol.cs" />
+    <Compile Include="Nodes\Expressions\Symbol.cs" />
     <Compile Include="Operations\OperationsBuilder.cs" />
+    <Compile Include="Parsing\Parser.cs" />
+    <Compile Include="Parsing\ParsingState.cs" />
     <Compile Include="Parsing\TokenCrawler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Segment.cs" />
     <Compile Include="VirtualMachine\IHostInterface.cs" />
     <Compile Include="VirtualMachine\Machine.cs" />
     <Compile Include="VirtualMachine\Module.cs" />
@@ -68,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Parsing\Expressions\" />
+    <Folder Include="Parsing\Statements\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

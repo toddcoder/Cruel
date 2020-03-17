@@ -2,41 +2,21 @@
 {
    public class Token
    {
-      public Token(string text, TokenType type, int index, int length, int startLine, int startColumn, int endLine, int endColumn)
+      public Token(string text, TokenType type, Segment segment)
       {
          Text = text;
          Type = type;
-         Index = index;
-         Length = length;
-         StartLine = startLine;
-         StartColumn = startColumn;
-         EndLine = endLine;
-         EndColumn = endColumn;
+         Segment = segment;
       }
 
-      public Token(string text, TokenType type, Substring substring) :
-         this(text, type, substring.Index, substring.Length, substring.StartLine, substring.StartColumn, substring.EndLine,
-            substring.EndColumn) { }
+      public Token(string text, TokenType type, Substring substring) : this(text, type, substring.Segment) { }
 
       public string Text { get; }
 
       public TokenType Type { get; }
 
-      public int Index { get; }
+      public Segment Segment { get; }
 
-      public int Length { get; }
-
-      public int StartLine { get; }
-
-      public int StartColumn { get; }
-
-      public int EndLine { get; }
-
-      public int EndColumn { get; }
-
-      public override string ToString()
-      {
-         return $"'{Text}'-{Type} @ ({Index}:{Length}) [{StartLine}, {StartColumn}]-[{EndLine}, {EndColumn}]";
-      }
+      public override string ToString() => $"'{Text}'-{Type} @ {Segment}";
    }
 }

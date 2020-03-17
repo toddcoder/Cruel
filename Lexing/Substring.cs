@@ -1,64 +1,43 @@
 ﻿using Core.Strings;
-using Cruel.Interfaces;
 
 namespace Cruel.Lexing
 {
-   public class Substring : ISegment
+   public class Substring
    {
       protected string source;
       protected int sourceLength;
-      protected int index;
-      protected int length;
-      protected int startLine;
-      protected int startColumn;
-      protected int endLine;
-      protected int endColumn;
+      protected Segment segment;
 
       public Substring(string source)
       {
          this.source = source;
 
          sourceLength = this.source.Length;
-         index = 0;
-         length = 0;
-         startLine = 1;
-         startColumn = 1;
-         endLine = 1;
-         endColumn = 1;
+         segment = new Segment();
       }
 
-      public bool More => index < sourceLength;
+      public bool More => segment.Index < sourceLength;
 
-      public string Current => source.Drop(index);
+      public string Current => source.Drop(segment.Index);
 
-      public char CurrentChar => source[index];
+      public char CurrentChar => source[segment.Index];
 
-      public int Index => index;
-
-      public int Length => length;
-
-      public int StartLine => startLine;
-
-      public int StartColumn => startColumn;
-
-      public int EndLine => endLine;
-
-      public int EndColumn => endColumn;
+      public Segment Segment => segment;
 
       public bool PreviousNewLine { get; set; }
 
       public bool Advance(int lengthOfToken)
       {
-         length = lengthOfToken;
+         segment.Length = lengthOfToken;
          if (PreviousNewLine)
          {
-            endColumn = length;
-            startLine++;
-            endLine++;
+            segment.EndColumn = segment.Length;
+            segment.StartLine++;
+            segment.EndLine++;
          }
          else
          {
-            endColumn = endColumn + length - 1;
+            segment.EndColumn = segment.EndColumn + segment.Length - 1;
          }
 
          return More;
@@ -66,16 +45,16 @@ namespace Cruel.Lexing
 
       public bool Next()
       {
-         index += length;
+         segment.Index += segment.Length;
 
          if (PreviousNewLine)
          {
-            startColumn = 1;
+            segment.StartColumn = 1;
             PreviousNewLine = false;
          }
          else
          {
-            startColumn += length;
+            segment.StartColumn += segment.Length;
          }
 
          return More;

@@ -49,7 +49,8 @@ namespace Cruel.Lexing
          var endLine = line;
          var endColumn = column;
 
-         var token = new Token(fragment, type, index, length, startLine, startColumn, endLine, endColumn);
+         var segment =new Segment(index, length, startLine, startColumn, endLine, endColumn);
+         var token = new Token(fragment, type, segment);
          tokens.Add(token);
 
          index += length;

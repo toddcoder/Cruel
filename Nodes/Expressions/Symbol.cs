@@ -1,4 +1,4 @@
-﻿namespace Cruel.Nodes.Symbols
+﻿namespace Cruel.Nodes.Expressions
 {
    public abstract class Symbol : Node
    {
