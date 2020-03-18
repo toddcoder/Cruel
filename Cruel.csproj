@@ -53,7 +53,9 @@
     <Compile Include="Lexing\Substring.cs" />
     <Compile Include="Lexing\Token.cs" />
     <Compile Include="Lexing\TokenType.cs" />
+    <Compile Include="Nodes\Expressions\Expression.cs" />
     <Compile Include="Nodes\Node.cs" />
+    <Compile Include="Nodes\SegmentExtensions.cs" />
     <Compile Include="Nodes\Statements\Statement.cs" />
     <Compile Include="Nodes\Expressions\Symbol.cs" />
     <Compile Include="Operations\OperationsBuilder.cs" />

@@ -11,7 +11,10 @@ namespace Cruel.Parsing.Expressions
    {
       Stack<Symbol> stack;
 
-      public SymbolStack() => stack = new Stack<Symbol>();
+      public SymbolStack()
+      {
+         stack = new Stack<Symbol>();
+      }
 
       public void Push(Symbol symbol) => stack.Push(symbol);
 
@@ -29,12 +32,7 @@ namespace Cruel.Parsing.Expressions
          }
 
          var symbol = stack.Peek();
-         if (!symbol.LeftToRight)
-         {
-            return symbol.Precedence < next.Precedence;
-         }
-
-         return symbol.Precedence <= next.Precedence;
+         return symbol.LeftToRight ? symbol.Precedence <= next.Precedence : symbol.Precedence < next.Precedence;
       }
 
       public void Clear() => stack.Clear();

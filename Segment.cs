@@ -2,6 +2,8 @@
 {
    public class Segment
    {
+      public static Segment Empty => new Segment(-1, -1, 0, 0, 0, 0);
+
       public Segment(int index, int length, int startLine, int startColumn, int endLine, int endColumn)
       {
          Index = index;
