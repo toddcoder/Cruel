@@ -35,6 +35,7 @@ namespace CruelCompiler
          assert(() => File).Must().HaveValue().OrThrow();
          if (File.If(out var file))
          {
+            assert(() => file).Must().Exist().OrThrow();
             var anyTokens =
                from lexer in Lexer.New(file)
                from parsed in lexer.Parse()
